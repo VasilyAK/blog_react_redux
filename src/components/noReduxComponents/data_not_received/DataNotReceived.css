@@ -1,0 +1,6 @@
+.data-not-received__back {
+	align-items: center;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+}

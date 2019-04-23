@@ -113,7 +113,7 @@ class Users extends Component {
 			if (this.props.users.length && this.props.pagination !== null) {
 				return usersBlock
 			} else {
-				return <DataNotReceived />
+				return <DataNotReceived dispatch={this.props.dispatch} handler={fetchUsers}/>
 			}
 		}
 	}

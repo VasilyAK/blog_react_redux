@@ -35,7 +35,9 @@ export function fetchUsers () {
 	return function (dispatch) {
 		dispatch({type: FETCH_USERS});
 
-		axios.get(`https://jsonplaceholder.typicode.com/users`)
+		axios.get(`https://jsonplaceholder.typicode.com/users`, {
+			timeout: 10000
+		})
 			.then(
 				response => {
 					dispatch({
@@ -47,7 +49,7 @@ export function fetchUsers () {
 					errors('isGet', error);
 					dispatch({
 						type: FETCH_USERS_REJECTED,
-						payload: error.data
+						payload: error
 					})
 				}
 			);

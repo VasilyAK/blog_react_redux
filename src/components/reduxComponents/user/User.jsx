@@ -3,9 +3,10 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 
 import PageHeader from "../../noReduxComponents/pageHeader/PageHeader";
-import DataNotReceived from "../../noReduxComponents/data_not_received/DataNotReceived";
 import UserCard from "../user/card/UserCard";
 import UserCardChange from "../user/card_change/UserCardChange";
+import Loading from "../../noReduxComponents/loading/Loading";
+import DataNotReceived from "../../noReduxComponents/data_not_received/DataNotReceived";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -70,13 +71,20 @@ class User extends Component {
 				{userCardBlock}
 			</>
 		;
-
-		if (data !== null) {
+		if (this.props.fetching) {
+			return <Loading />
+		} else {
+			if (data !== null) {
 				return userBLock;
 			} else {
-				return <DataNotReceived/>
+				return <DataNotReceived
+					dispatch={this.props.dispatch}
+					handler={fetchUser}
+					params={parseInt(this.props.match.params.userId)}
+				/>
 			}
 		}
+	}
 
 	componentDidMount() {
 		if (!this.props.users.length) {

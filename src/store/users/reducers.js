@@ -75,14 +75,13 @@ const usersReducer = (state = userInitialState, action) => {
 					if (step+1 < action.payload.path.length){
 						setNewData(data[action.payload.path[step]], step+1)
 					} else {
-						console.log(step, data);
 						data[action.payload.path[step]] = action.payload.data
 					}
 				})(newUserData, 0);
 
 				return {
 					...state,
-					userData: newData
+					usersData: newData
 				};
 			} else {
 				return state

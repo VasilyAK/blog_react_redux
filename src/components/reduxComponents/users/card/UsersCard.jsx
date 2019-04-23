@@ -2,12 +2,15 @@ import "./UsersCard.css";
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
+import UserCardInfo from "./userCardInfo/UserCardInfo";
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup"
+
 import {delUser} from "../../../../store/users/actions";
 
 
@@ -24,6 +27,7 @@ export default class UsersCard extends Component {
 	render() {
 		return (
 			<Card className="mb-4">
+
 				<Card.Header>
 					<Container>
 						<Row>
@@ -43,28 +47,37 @@ export default class UsersCard extends Component {
 						</Row>
 					</Container>
 				</Card.Header>
+
 				<Card.Body>
-					<Card.Text>
-						Address:<br />
-							city {this.props.address.city}<br />
-							street {this.props.address.street}<br />
-							suite {this.props.address.suite}<br />
-							zipcode {this.props.address.zipcode}
-					</Card.Text>
-					<Card.Text>
-						Company:<br />
-							bs: {this.props.company.bs}<br />
-							catch phrase: {this.props.company.catchPhrase}<br />
-							name: {this.props.company.name}<br />
-					</Card.Text>
-					<Card.Text>
-						User:<br />
-							username: {this.props.username}<br />
-							phone: {this.props.phone}<br />
-							website: {this.props.website}<br />
-							email: {this.props.email}<br />
-					</Card.Text>
+					<ListGroup as={Container} variant="flush">
+
+						<ListGroup.Item>
+							<Row>
+								<Col md={6}>
+									<Row className="my-1">
+										<Col className="users__info1-p-bold">Address:</Col>
+									</Row>
+									<UserCardInfo name={'city'} source={this.props.address.city}/>
+									<UserCardInfo name={'street'} source={this.props.address.street}/>
+								</Col>
+
+								<Col md={6}>
+									<UserCardInfo name={'phone'} source={this.props.phone}/>
+									<UserCardInfo name={'website'} source={this.props.website}/>
+									<UserCardInfo name={'email'} source={this.props.email}/>
+								</Col>
+							</Row>
+						</ListGroup.Item>
+
+						<ListGroup.Item>
+							<Col md={6} className="px-0">
+								<UserCardInfo name={'Company'} source={this.props.company.name}/>
+							</Col>
+						</ListGroup.Item>
+
+					</ListGroup>
 				</Card.Body>
+
 			</Card>
 		)
 	}

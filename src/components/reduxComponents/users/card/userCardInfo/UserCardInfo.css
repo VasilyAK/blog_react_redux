@@ -1,0 +1,9 @@
+.users-card-info_italic {
+	font-style: italic;
+	font-weight: revert;
+}
+
+.users-card-info__table-td_nowrap {
+	font-weight: revert;
+	white-space: nowrap;
+}

@@ -17,12 +17,15 @@ export function changeUser (sourceData) {
 }
 
 export function fetchUser (id) {
+	console.log(id);
 	try {
 		if (isNumInt(id)) {
 			return function (dispatch) {
 				dispatch({type: FETCH_USER});
 
-				axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+				axios.get(`https://jsonplaceholder.typicode.com/users/${id}`, {
+					timeout: 10000
+				})
 					.then(
 						response => {
 							dispatch ({
@@ -34,7 +37,7 @@ export function fetchUser (id) {
 							errors('isGet', error);
 							dispatch ({
 								type: FETCH_USER_REJECTED,
-								payload: error.data
+								payload: error
 							})
 						}
 					);
