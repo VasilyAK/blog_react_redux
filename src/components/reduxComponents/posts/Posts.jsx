@@ -1,3 +1,4 @@
+import "./Posts.css";
 import React, {Component} from "react";
 
 import PageHeader from "../../noReduxComponents/pageHeader/PageHeader";

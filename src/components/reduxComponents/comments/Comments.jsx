@@ -1,3 +1,4 @@
+import "./Comments.css";
 import React, {Component} from "react";
 import PageHeader from "../../noReduxComponents/pageHeader/PageHeader";
 import Card from "./card/Card.jsx";
@@ -35,18 +36,10 @@ export default class Comments extends Component {
 			</>
 		;
 
-		if (this.props.params.commentId) {
-			return (
-				<>
-					{this.props.children}
-				</>
-			)
+		if (this.state.comments.length > 0 && this.state.posts.length > 0) {
+			return commentsBlock
 		} else {
-			if (this.state.comments.length > 0 && this.state.posts.length > 0) {
-				return commentsBlock
-			} else {
-				return null
-			}
+			return null
 		}
 	}
 }

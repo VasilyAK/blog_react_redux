@@ -1,3 +1,4 @@
+import "./Post.css";
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import PageHeader from "../../noReduxComponents/pageHeader/PageHeader";
