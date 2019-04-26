@@ -12,29 +12,23 @@ const Category = () => {
 			<Card.Header>Categories</Card.Header>
 			<Card.Body>
 				<Row>
-					<Col lg={6}>
+					<Col lg={6} className="pl-5">
 						<ul className="list-unstyled mb-0">
 							<li>
-								<Link to="#">Web Design</Link>
+								<Link to="/">Home</Link>
 							</li>
 							<li>
-								<Link to="#">HTML</Link>
-							</li>
-							<li>
-								<Link to="#">Freebies</Link>
+								<Link to="/posts">Posts</Link>
 							</li>
 						</ul>
 					</Col>
-					<Col lg={6}>
+					<Col lg={6} className="pr-4">
 						<ul className="list-unstyled mb-0">
 							<li>
-								<Link to="#">JavaScript</Link>
+								<Link to="/users">Users</Link>
 							</li>
 							<li>
-								<Link to="#">CSS</Link>
-							</li>
-							<li>
-								<Link to="#">Tutorials</Link>
+								<Link to="/comments">Comments</Link>
 							</li>
 						</ul>
 					</Col>

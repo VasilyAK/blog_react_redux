@@ -17,7 +17,6 @@ export function changeUser (sourceData) {
 }
 
 export function fetchUser (id) {
-	console.log(id);
 	try {
 		if (isNumInt(id)) {
 			return function (dispatch) {

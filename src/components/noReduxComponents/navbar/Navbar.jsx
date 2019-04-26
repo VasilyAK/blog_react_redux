@@ -7,63 +7,51 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
 
-export default class NavbarPost extends Component {
-	constructor (props) {
-		super(props);
+const NavbarBlog = (props) => {
+	return (
+		<Navbar variant="dark" bg="dark" expand="lg" fixed="top">
+			<Container>
 
-		this.state = {
-			active: window.location.pathname.replace(/^\/([^\/]+)/, '$1')
-		}
-	}
+				<Navbar.Brand>
+					<Link className="search__brand" to="/">React Post by VAK</Link>
+				</Navbar.Brand>
 
-	linkClick (active) {
-		this.setState({	active})
-	}
+				<Navbar.Toggle aria-controls="navbarResponsive">
+					<span className="navbar-toggler-icon" />
+				</Navbar.Toggle>
 
-	render () {
-		return (
-			<Navbar variant="dark" bg="dark" expand="lg" fixed="top">
-				<Container>
+				<Navbar.Collapse id="navbarResponsive">
+					<Nav as="ul" className="justify-content-end">
 
-					<Navbar.Brand>
-						<Link to="/home">React Post by VAK</Link>
-					</Navbar.Brand>
+						<Nav.Item as="li" className={`nav-item ${props.page === '/' ? 'active': ''}`}>
+							<Link to="/" className="nav-link">
+								Home
+							</Link>
+						</Nav.Item>
 
-					<Navbar.Toggle aria-controls="navbarResponsive">
-						<span className="navbar-toggler-icon" />
-					</Navbar.Toggle>
+						<Nav.Item as="li" className={`nav-item ${props.page === 'posts' ? 'active': ''}`}>
+							<Link to="/posts" className="nav-link">
+								Posts
+							</Link>
+						</Nav.Item>
 
-					<Navbar.Collapse id="navbarResponsive">
-						<Nav as="ul" className="justify-content-end">
+						<Nav.Item as="li" className={`nav-item ${props.page === 'users' ? 'active': ''}`}>
+							<Link to="/users" className="nav-link">
+								Users
+							</Link>
+						</Nav.Item>
 
-							<Nav.Item as="li" className={`nav-item ${this.state.active === '/' ? 'active': ''}`}>
-								<Link to="/" className="nav-link" onClick={this.linkClick.bind(this, '/')}>
-									Home
-								</Link>
-							</Nav.Item>
+						<Nav.Item as="li"  className={`nav-item ${props.page === 'comments' ? 'active': ''}`}>
+							<Link to="/comments" className="nav-link">
+								Comments
+							</Link>
+						</Nav.Item>
 
-							<Nav.Item as="li" className={`nav-item ${this.state.active === 'posts' ? 'active': ''}`}>
-								<Link to="/posts" className="nav-link" onClick={this.linkClick.bind(this, 'posts')}>
-									Posts
-								</Link>
-							</Nav.Item>
+					</Nav>
+				</Navbar.Collapse>
+			</Container>
+		</Navbar>
+	)
+};
 
-							<Nav.Item as="li" className={`nav-item ${this.state.active === 'users' ? 'active': ''}`}>
-								<Link to="/users" className="nav-link" onClick={this.linkClick.bind(this, 'users')}>
-									Users
-								</Link>
-							</Nav.Item>
-
-							<Nav.Item as="li"  className={`nav-item ${this.state.active === 'comments' ? 'active': ''}`}>
-								<Link to="/comments" className="nav-link" onClick={this.linkClick.bind(this, 'comments')}>
-									Comments
-								</Link>
-							</Nav.Item>
-
-						</Nav>
-					</Navbar.Collapse>
-				</Container>
-			</Navbar>
-		)
-	}
-}
+export default NavbarBlog;
