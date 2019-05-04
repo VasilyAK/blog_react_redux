@@ -6,24 +6,24 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import Navbar from "../components/noReduxComponents/navbar/Navbar.jsx";
-import Sidebar from "../components/noReduxComponents/sidebar/Sidebar.jsx";
-import Footer from "../components/noReduxComponents/footer/Footer.jsx";
+import Navbar from "../components/navbar/Navbar.jsx";
+import Sidebar from "../components/sidebar/Sidebar.jsx";
+import Footer from "../components/footer/Footer.jsx";
 
-import NotFound from "../components/noReduxComponents/not_found/NotFound";
+import NotFound from "../components/not_found/NotFound";
 
-import Home from "../components/noReduxComponents/home/Home";
-import Comment from "../components/reduxComponents/comment/Comment";
-import Comments from "../components/reduxComponents/comments/Comments";
-import Post from "../components/reduxComponents/post/Post";
-import Posts from "../components/reduxComponents/posts/Posts";
-import User from "../components/reduxComponents/user/User";
-import Users from "../components/reduxComponents/users/Users";
+import Home from "../components/home/Home";
+import Comment from "../containers/comment/Comment";
+import Comments from "../containers/comments/Comments";
+import Post from "../containers/post/Post";
+import Posts from "../containers/posts/Posts";
+import User from "../containers/user/User";
+import Users from "../containers/users/Users";
 
 const Layout = (props) => {
 	return (
 		<div className="layout">
-			<Navbar page={window.location.pathname.replace(/^\/([^\/]+)/, '$1')}/>
+			<Navbar page={window.location.pathname.replace(/^\/([^\/]+)(\/.*)?/, '$1')}/>
 			<Container className="main-block">
 				<Row sm={8}>
 					<Col sm={8}>
