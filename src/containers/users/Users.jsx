@@ -62,54 +62,56 @@ class Users extends Component {
 	}
 
 	render() {
-		let modalMessageBlock = null;
-		if (this.props.attention !== null) {
-			modalMessageBlock =
-				<ModalMessage
-					message={this.props.attention}
-					dispatch={this.props.dispatch}
-					action={resetAttentionUser}
-				/>
-			;
-		}
+		let usersBlock = null;
 
-		const users = []; // определяем users на странице
-		if (this.props.pagination !== null && !this.props.pagination.update) {
-			const usersFrom = (this.props.pagination.active-1) * this.props.pagination.counts.countOfItemsOnPage;
+		if (this.props.users.length && this.props.pagination !== null && !this.props.pagination.update) {
+			let modalMessageBlock = null;
+			if (this.props.attention !== null) {
+				modalMessageBlock =
+					<ModalMessage
+						message={this.props.attention}
+						dispatch={this.props.dispatch}
+						action={resetAttentionUser}
+					/>
+				;
+			}
+
+			const users = []; // определяем users на странице
+			const usersFrom = (this.props.pagination.active - 1) * this.props.pagination.counts.countOfItemsOnPage;
 			const usersTo = this.props.pagination.active * this.props.pagination.counts.countOfItemsOnPage;
-			for (let i = usersFrom; i < usersTo; i++){
+			for (let i = usersFrom; i < usersTo; i++) {
 				if (this.props.users[i]) {
 					users.push(this.props.users[i]);
 				}
 			}
-		}
 
-		const usersBlock =
-			<>
-				{modalMessageBlock}
-				<PageHeader
-					title="Users"
-					btnTitle="Add new User"
-					btnHandler={this.addUser}
-				/>
-				{
-					users.map((user, index) => {
-						return <UsersCard
-							key={index}
-							{...user}
-							pagination={this.props.pagination}
-							dispatch={this.props.dispatch}
-						/>
-					})
-				}
-				<Pagination
-					{...this.props.pagination}
-					dispatch={this.props.dispatch}
-					action={updatePagination}
-					category="USERS"
-				/>
-			</>
-		;
+			usersBlock =
+				<>
+					{modalMessageBlock}
+					<PageHeader
+						title="Users"
+						btnTitle="Add new User"
+						btnHandler={this.addUser}
+					/>
+					{
+						users.map((user, index) => {
+							return <UsersCard
+								key={index}
+								{...user}
+								pagination={this.props.pagination}
+								dispatch={this.props.dispatch}
+							/>
+						})
+					}
+					<Pagination
+						{...this.props.pagination}
+						dispatch={this.props.dispatch}
+						action={updatePagination}
+						category="USERS"
+					/>
+				</>
+			;
+		}
 
 		if (this.props.fetching) {
 			return <Loading />

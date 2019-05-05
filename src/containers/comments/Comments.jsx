@@ -46,56 +46,58 @@ class Comments extends Component {
 	}
 
 	render() {
-		let modalMessageBlock = null;
-		if (this.props.attention !== null) {
-			modalMessageBlock =
-				<ModalMessage
-					message={this.props.attention}
-					dispatch={this.props.dispatch}
-					action={resetAttentionComment}
-				/>
-			;
-		}
+		let commentsBlock = null;
 
-		const comments = []; // определяем comments на странице
-		if (this.props.pagination !== null && !this.props.pagination.update) {
-			const commentsFrom = (this.props.pagination.active-1) * this.props.pagination.counts.countOfItemsOnPage;
+		if (this.props.comments.length && this.props.posts.length && this.props.pagination !== null && !this.props.pagination.update) {
+			let modalMessageBlock = null;
+			if (this.props.attention !== null) {
+				modalMessageBlock =
+					<ModalMessage
+						message={this.props.attention}
+						dispatch={this.props.dispatch}
+						action={resetAttentionComment}
+					/>
+				;
+			}
+
+			const comments = []; // определяем comments на странице
+			const commentsFrom = (this.props.pagination.active - 1) * this.props.pagination.counts.countOfItemsOnPage;
 			const commentsTo = this.props.pagination.active * this.props.pagination.counts.countOfItemsOnPage;
-			for (let i = commentsFrom; i < commentsTo; i++){
+			for (let i = commentsFrom; i < commentsTo; i++) {
 				if (this.props.comments[i]) {
 					comments.push(this.props.comments[i]);
 				}
 			}
-		}
 
-		const commentsBlock =
-			<>
-				{modalMessageBlock}
-				<PageHeader
-					title="Comments"
-					btnTitle="Add new Comment"
-					btnHandler={this.addComment}
-				/>
-				{
-					comments.map((comment, index) => {
-						const post = this.props.posts.find((post) => post.id === comment.postId);
-						return <CommentsCard
-							key={index}
-							comment={comment}
-							post={post}
-							pagination={this.props.pagination}
-							dispatch={this.props.dispatch}
-						/>
-					})
-				}
-				<Pagination
-					{...this.props.pagination}
-					dispatch={this.props.dispatch}
-					action={updatePagination}
-					category="COMMENTS"
-				/>
-			</>
-		;
+			commentsBlock =
+				<>
+					{modalMessageBlock}
+					<PageHeader
+						title="Comments"
+						btnTitle="Add new Comment"
+						btnHandler={this.addComment}
+					/>
+					{
+						comments.map((comment, index) => {
+							const post = this.props.posts.find((post) => post.id === comment.postId);
+							return <CommentsCard
+								key={index}
+								comment={comment}
+								post={post}
+								pagination={this.props.pagination}
+								dispatch={this.props.dispatch}
+							/>
+						})
+					}
+					<Pagination
+						{...this.props.pagination}
+						dispatch={this.props.dispatch}
+						action={updatePagination}
+						category="COMMENTS"
+					/>
+				</>
+			;
+		}
 
 
 		if (this.props.fetchingComments || this.props.fetchingPosts) {
